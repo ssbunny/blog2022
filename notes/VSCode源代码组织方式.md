@@ -1,9 +1,11 @@
+# VSCode 源代码组织方式
+
 源码结构主要由内核及插件组成 ：
 
 * core
 * extensions
 
-![IMAGE](resources/90FF357062107DCBD0FE11C6438A3AF2.jpg =283x389)
+![IMAGE](./resources/90FF357062107DCBD0FE11C6438A3AF2.jpg)
 
 ## 内核
 
@@ -14,7 +16,7 @@
 * `editor` ：编辑器相关
 * `workbench` ：框架相关，如状态栏、菜单等
 
-![IMAGE](resources/93DD3404010EF42752AFFA2FCD928862.jpg =170x279)
+![IMAGE](./resources/93DD3404010EF42752AFFA2FCD928862.jpg)
 
 ## 目标环境
 
@@ -27,7 +29,7 @@
 * electron-browser：需要 Electron 渲染进程 API
 * electron-sandbox：需要浏览器 API 并有一小部分与 Electron 主进程通信的 API
 
-![IMAGE](resources/EF03F80D73ABD513496E3B54052EBC07.jpg =221x266)
+![IMAGE](./resources/EF03F80D73ABD513496E3B54052EBC07.jpg)
 
 ## 依赖注入
 

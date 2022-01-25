@@ -1,4 +1,4 @@
-(PS: 我用的笔记软件对 TypeScript 语法高亮支持的很差)
+# TypeScript 官方手册学习笔记
 
 ## 1. 基本类型
 
@@ -1209,9 +1209,9 @@ createInstance(Bee).keeper.hasMask;
 
 ---
 
-# 1. 高级类型
+## 高级类型
 
-## 1.1 区分类型
+### 1 区分类型
 
 使用 type assertion 获取实际的类型：
 
@@ -1257,7 +1257,7 @@ function move(pet: Fish | Bird) {
 
 `typeof` 的类型检测会被编译器自动进行类型收缩（减少不必要的 type predicate）。`instanceof` 有同样的效果，其右侧必需为构造函数。
 
-## 1.2 可空类型
+### 2 可空类型
 
 默认情况下 `null` 和 `undefined` 是其它所有类型的子类。开启 `--strictNullChecks` 后
 
@@ -1306,7 +1306,7 @@ function f(stringOrNull: string | null): string {
 }
 ```
 
-## 1.3 类型别名
+### 3 类型别名
 
 有点像接口，但是可以给原生类型、union、元组等任何类型定义别名。
 
@@ -1325,6 +1325,7 @@ type Tree<T> = {
 ```
 
 接口可继承，而 Type 只能通过 intersection 来扩展属性：
+
 
 <table>
   <tr>
@@ -1353,12 +1354,13 @@ bear.name;
 bear.honey;</pre>
     </td>
   </tr>
-<table>
+</table>
+
 
 别名一般用在 union 或 tuple 中，通常情况下更推荐使用接口。
 
 
-## 1.4 多态的 this 类型
+### 4 多态的 this 类型
 
 返回其类型或子类型的 this ，构造流式 API ：
 
@@ -1382,7 +1384,7 @@ class BasicCalculator {
 let v = new BasicCalculator(2).multiply(5).add(1).currentValue();
 ```
 
-## 1.5 索引类型
+### 5 索引类型
 
 ```ts
 function pluck<T, K extends keyof T>(o: T, propertyNames: K[]): T[K][] {
@@ -1426,7 +1428,7 @@ let keys: keyof Dictionary<number>;   // string | number
 let value: Dictionary<number>["foo"]; // number
 ```
 
-## 1.6 映射类型
+### 6 映射类型
 
  通过旧类型生成新类型：
  
@@ -1471,7 +1473,7 @@ type Record<K extends keyof any, T> = {
 };
 ```
 
-## 1.7 条件(Conditional)类型
+### 7 条件(Conditional)类型
 
 TODO 高级知识，以后再回来看。
 
@@ -1481,11 +1483,5 @@ T 如果可被赋值给 U ，则类型为 X ，否则为 Y 。
 T extends U ? X : Y
 ```
 
-
-
-
-
 ---
 @ssbunny 2020-02-03
-
-![微信二维码_zhq_tiny.png](resources/9BDF5BC45B39A9BBFBF64D55FD48EC5B.png =217x260)

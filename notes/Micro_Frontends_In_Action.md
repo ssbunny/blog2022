@@ -23,13 +23,13 @@
 各团队创建自己的页面文件或片段
 
 ##### 片段
-![IMAGE](resources/F68EA11320608543751B341674B34B22.jpg)
+![IMAGE](./resources/F68EA11320608543751B341674B34B22.jpg)
 
 片段使用自己的状态或从页面中获取上下文信息。页面不需要知道片段的状态信息。
 
 #### Frontend integration
 
-![IMAGE](resources/333FA68BC8E41BD7DECB161DE6988F30.jpg)
+![IMAGE](./resources/333FA68BC8E41BD7DECB161DE6988F30.jpg)
 
 1）路由和页面变化：
 * 两种形式——HTML链接跳转、客户端路由

@@ -1,6 +1,8 @@
+# Redis 中的命令
+
 Redis 中有五种常用数据结构，它们都有对应的操作命令：
 
-![redis.png](resources/137EF8469E4CBCBEA2317255843EAB42.png =1178x513)
+![redis.png](./resources/137EF8469E4CBCBEA2317255843EAB42.png)
 
 [[当前最新的所有命令]](http://redis.io/commands)
 
@@ -26,11 +28,11 @@ Redis 中 `STRINGs` 用来存储三种类型：
 
 如果尝试在空字符串或不存在的 key 上调用 `INCR*` 或 `DECR*` ，当前 key 值会被当作 `0` 来处理：
 
-![incr_empty.png](resources/792EC40D65671A2538C94E865939FD8E.png =1116x340)
+![incr_empty.png](./resources/792EC40D65671A2538C94E865939FD8E.png)
 
 如果尝试在非整数或浮点数上调用 `INCR*` 或 `DECR*` ，会抛出 error ：
 
-![incr_error.png](resources/99CE7B7F9A2CBB7CD755675FBB05E0E7.png =1122x138)
+![incr_error.png](./resources/99CE7B7F9A2CBB7CD755675FBB05E0E7.png)
 
 **操纵字符串命令**
 
@@ -46,7 +48,7 @@ Redis 中 `STRINGs` 用来存储三种类型：
 
 使用示例：
 
-![setrange.png](resources/D3C64C0A2B440D0FE29678322D0DD272.png =1116x202)
+![setrange.png](./resources/D3C64C0A2B440D0FE29678322D0DD272.png)
 
 ## 2. 列表
 
@@ -75,7 +77,7 @@ Redis 中 `STRINGs` 用来存储三种类型：
 
 以上命令在操作消息队列或任务队列时非常常用。使用示例：
 
-![brpop.png](resources/38E887E369E1C5AC63FBE991C5F9949B.png =1534x460)
+![brpop.png](./resources/38E887E369E1C5AC63FBE991C5F9949B.png)
 
 当右侧的终端执行命令后，左侧输出上图结果，否则会一直等待 20 秒超时并返回 `nil` 。
 
@@ -109,7 +111,7 @@ Redis 中 `STRINGs` 用来存储三种类型：
 
 使用示例：
 
-![sdiff.png](resources/31006A9F5BAA82DBCD5B25A5ADBCD24D.png =1128x302)
+![sdiff.png](./resources/31006A9F5BAA82DBCD5B25A5ADBCD24D.png)
 
 ## 4. 哈希
 
@@ -126,7 +128,7 @@ Redis 中 `STRINGs` 用来存储三种类型：
 
 使用示例：
 
-![hash_common.png](resources/1F8C9446CC0CE263A8CB023955AA73A6.png =1216x438)
+![hash_common.png](./resources/1F8C9446CC0CE263A8CB023955AA73A6.png)
 
 **批量操作**
 
@@ -173,27 +175,27 @@ Redis 中 `STRINGs` 用来存储三种类型：
 
 `ZINTERSTORE` 使用示例：
 
-![zinterstore.png](resources/F92752842190B6685BA99E6A7562C0E4.png =1206x438)
+![zinterstore.png](./resources/F92752842190B6685BA99E6A7562C0E4.png)
 
 其执行过程如下：
 
-![zinterstore_detail.png](resources/838EC2AB0F513CA9B579A734D2C11F59.png =1166x284)
+![zinterstore_detail.png](./resources/838EC2AB0F513CA9B579A734D2C11F59.png)
 
 `ZUNIONSTORE` 使用示例：
 
-![zunionstore.png](resources/461D2E79AF8937F2CB85E5781D80EBA1.png =1274x368)
+![zunionstore.png](./resources/461D2E79AF8937F2CB85E5781D80EBA1.png)
 
 其执行过程如下：
 
-![zunionstore_detail.png](resources/3425C91D0CF155E3077D990D823B26A5.png =1164x316)
+![zunionstore_detail.png](./resources/3425C91D0CF155E3077D990D823B26A5.png)
 
 ZSET 和 SET 取交集示例：
 
-![zunionstore_with_set.png](resources/BB01732A4E9A22A7A7837D67D3164620.png =1240x438)
+![zunionstore_with_set.png](./resources/BB01732A4E9A22A7A7837D67D3164620.png)
 
 其执行过程如下：
 
-![zunionstore_with_set_detail.png](resources/CFDEF495A36B671AAD006590DCC51FD3.png =1312x298)
+![zunionstore_with_set_detail.png](./resources/CFDEF495A36B671AAD006590DCC51FD3.png)
 
 ## 6. 发布/订阅
 
@@ -245,13 +247,13 @@ lilei.subscribe('classroom'); // channel
 
 输出结果：
 
-![pubsub.png](resources/91129472CDCEFBD97420D35AC269B569.png =1074x100)
+![pubsub.png](./resources/91129472CDCEFBD97420D35AC269B569.png)
 
 ## 7. 排序
 
 `SORT` 用来给 list, set(或 zset) 排序。例如：
 
-![sort.png](resources/53F9E2FFDE28B94AF7973EBB592B5E33.png =1248x336)
+![sort.png](./resources/53F9E2FFDE28B94AF7973EBB592B5E33.png)
 
 完整的定义为：
 
@@ -265,9 +267,7 @@ lilei.subscribe('classroom'); // channel
 
 `SORT` 还可以实现类似关系数据库的外键查询，或跳过某元素等等更高级的功能。例如：
 
-![sort_more.png](resources/7DC203A5720C310786EA548890B81E95.png =1366x1106)
+![sort_more.png](./resources/7DC203A5720C310786EA548890B81E95.png)
 
 ---
 @ssbunny 2015-12-03
-
-![微信二维码_zhq_tiny.png](resources/9BDF5BC45B39A9BBFBF64D55FD48EC5B.png =217x260)

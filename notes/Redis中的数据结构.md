@@ -1,4 +1,6 @@
-# 简单动态字符串（SDS）
+# 源码阅读: Redis 中的数据结构
+
+## 简单动态字符串（SDS）
 
 Redis 底层使用 **SDS** (Simple Dynamic Strings) 作为字符串类型的存储方式之一，其结构非常简单，直接看源码即可了解个大概：
 
@@ -37,11 +39,13 @@ sds sdsnewlen(const void *init, size_t initlen) {
 
 通过源代码了解到，实际存储字符串相关信息的仍然是 `struct` （sdshdr），sds 其实是返回指向其 buf 数组的首个元素的指针。借用 redis 作者的描述：
 
+```:no-line-numbers
     +--------+-------------------------------+-----------+
     | Header | Binary safe C alike string... | Null term |
     +--------+-------------------------------+-----------+
              |
              `-> Pointer returned to the user.
+```
 
 另外值得注意的是，通过：
 
@@ -63,7 +67,7 @@ static inline size_t sdslen(const sds s) {
 
 唐老师给我画了一张图，可以帮助理解：
 
-![sds.png](resources/23292DAFFAC4ED2DBA5871B52F48DDD1.png =474x156)
+![sds.png](./resources/23292DAFFAC4ED2DBA5871B52F48DDD1.png)
 
 最后一个值得关注的问题是，sds 是如何扩容的？这一过程在 sdsMakeRoomFor 函数中实现：
 
@@ -104,7 +108,7 @@ $ APPEND foo blahblah
 
 当然，这种预先分配容量的方式，虽然能减少内存分配的次数，提高 `APPEND` 操作的性能，但会造成一定的内存占用，而且此部分内存不会主动释放。 
 
-# 双链表
+## 双链表
 
 Redis 实现了通用的双链表作为其基础数据结构之一。双链表是 redis 列表类型的实际存储方式之一，同时双链表还被其它功能模块广泛使用。它由三部分组成：
 
@@ -139,7 +143,7 @@ typedef struct list {
 
 `list` 中保存了指向表头和表尾的指针，因此在执行 `LPUSH`、`RPUSH`、`RPOP` 等命令时是非常快的(θ(1))；其中还保存了 len 值，因此 `LLEN` 命令的执行也是非常快的。
 
-![double_link_list](resources/60E77FCC62AFB881BD511EFBA5CC2D75.jpg =722x284)
+![double_link_list](./resources/60E77FCC62AFB881BD511EFBA5CC2D75.jpg)
 
 另外，它还保存了三个函数指针 dup、free 和 match 用来复制、释放和对比链表，这样做是因为节点值的类型是不确定的，具体的实现方法交由用户代码灵活扩展处理。比如如果用户定义了 match 函数的实现，则采用它来替换默认使用 `==` 的比较策略：
 
@@ -212,7 +216,7 @@ void listRewind(list *list, listIter *li);
 void listRewindTail(list *list, listIter *li);
 ```
 
-# 散列表 
+## 散列表 
 
 散列表是 redis 中的基础数据结构之一， redis 中的键空间、redisDB、 `SET`、`ZSET`、集群节点映射等，都是通过散列表实现的。结构体定义为：
 
@@ -269,7 +273,7 @@ typedef struct dictEntry {
 
 当发生冲突时，dict 首先会使用**分离链接法**将散列到同一个值的所有元素保留到一个表中。当到了一定时机，它会通过**再散列**进行扩展。
 
-![redis-dict](resources/053A33AD926FC77065F91A1CF3572323.jpg =958x293)
+![redis-dict](./resources/053A33AD926FC77065F91A1CF3572323.jpg)
 
 Redis 还提供了遍历散列表用的迭代器，它支持安全(遍历期间可以增加元素等操作)、不安全两种方式遍历散列表：
 
@@ -285,11 +289,11 @@ typedef struct dictIterator {
 
 todo 渐进式再散列
 
-# 数据存储结构关系
+## 数据存储结构关系
 
 总起来看，redis 的数据存储结构大致是这样的：
 
-![overview.png](resources/2F9A2DE767196BF0A82C7997930F2139.png =1740x972)
+![overview.png](./resources/2F9A2DE767196BF0A82C7997930F2139.png )
 
 它使用全局变量 `server` 来存储服务器信息：
 
@@ -390,7 +394,7 @@ typedef struct redisObject {
 
 通常一个 redis 的对象类型都会对应两个以上的编码方式，它们的详细对应关系为：
 
-![IMAGE](resources/17F186B3238570327E5D95AFE36E1BB1.jpg =761x419)
+![IMAGE](./resources/17F186B3238570327E5D95AFE36E1BB1.jpg)
 
 命令示例：
 
@@ -421,5 +425,3 @@ _(使用的源码基于 redis 3.0.5)_
 
 ---
 @ssbunny 2015-12
-
-![微信二维码_zhq_tiny.png](resources/9BDF5BC45B39A9BBFBF64D55FD48EC5B.png =217x260)

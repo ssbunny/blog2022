@@ -1,3 +1,4 @@
 node_modules
 .vuepress/.temp
 .vuepress/.cache
+.DS_Store

@@ -13,6 +13,9 @@ sidebar: false
 * [写好程序分支控制](写好程序分支控制.md)
 * [CSS 布局技巧之 2015](CSS布局技巧.md)
 * [Java8 之 Lambda 表达式](Java8之Lambda表达式.md)
+* [Redis 中的命令](Redis中的命令.md)
+* [源码阅读: Redis 中的数据结构](Redis中的数据结构.md)
+
 
 ## 心得
 
@@ -22,9 +25,16 @@ sidebar: false
 ## 笔记
 
 * [Micro Frontends In Action](Micro_Frontends_In_Action.md)
+* [VSCode 源代码组织方式](VSCode源代码组织方式.md)
+* [TypeScript 官方手册学习笔记](TypeScript官方手册学习笔记.md)
+
 
 ## 译文
 
 * [页面生命周期 API](页面生命周期API.md)
 * [响应式编程介绍](响应式编程介绍.md)
 * [几幅漫画介绍 WebAssembly](几幅漫画介绍WebAssembly.md)
+
+---
+
+<img src="./resources/9BDF5BC45B39A9BBFBF64D55FD48EC5B.png" style="width:200px"/>

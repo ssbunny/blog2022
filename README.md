@@ -3,7 +3,7 @@ home: true
 title: 首页
 discription: 个人空间
 heroImage: /images/work.svg
-# heroText: ssbun_ny
+# heroText: 
 tagline: 对内消除傲慢，对外消除偏见。
 features:
   - title: C.A.R. Hoare
