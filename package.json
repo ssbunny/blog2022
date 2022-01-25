@@ -1,0 +1,22 @@
+{
+  "name": "myblog2022",
+  "version": "1.0.0",
+  "description": "my personal blog",
+  "main": "index.js",
+  "dependencies": {},
+  "devDependencies": {
+    "vuepress": "^2.0.0-beta.35"
+  },
+  "scripts": {
+    "dev": "vuepress dev",
+    "build": "vuepress build"
+  },
+  "keywords": [
+    "blog",
+    "web",
+    "java",
+    "life"
+  ],
+  "author": "zhangqiang",
+  "license": "MIT"
+}
