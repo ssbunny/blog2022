@@ -1,7 +1,6 @@
 
 module.exports = {
   base: '/',
-  dest: '~/Code/github_projects/ssbunny.github.io',
 
   head: [
     ['link', { rel: 'icon', href: '/images/favicon.ico' }]
