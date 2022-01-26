@@ -1,11 +1,11 @@
-name: Build and Deploy
+name: Deploy to ssbunny.github.io
 on:
   push:
     branches:
       - master
 jobs:
   run:
-    name: deplay my blog
+    name: 构建博客
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
