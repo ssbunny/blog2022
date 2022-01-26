@@ -8,15 +8,17 @@ jobs:
     name: 构建博客
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout
-        uses: actions/checkout@master
+    - name: Checkout
+      uses: actions/checkout@master
 
-      - name: vuepress-deploy
-        uses: ssbunny/blog2022@master
-        env:
-          ACCESS_TOKEN: ${{ secrets.ACCESS_TOKEN }}
-          TARGET_REPO: ssbunny/ssbunny.github.io
-          TARGET_BRANCH: master
-          BUILD_SCRIPT: yarn && yarn build
-          BUILD_DIR: .vuepress/dist
-          CNAME: http://zhangqiang.work
+    - name: vuepress-deploy
+      uses: ssbunny/blog2022@master
+      env:
+        ACCESS_TOKEN: ${{ secrets.ACCESS_TOKEN }}
+        TARGET_REPO: ssbunny/ssbunny.github.io
+        TARGET_BRANCH: master
+        BUILD_SCRIPT: yarn && yarn build
+        FOLDER: .vuepress/dist
+        CNAME: http://zhangqiang.work
+      run:
+        echo $ACCESS_TOKEN
