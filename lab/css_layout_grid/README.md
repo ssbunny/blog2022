@@ -29,8 +29,6 @@ Grid 用于二维布局，是 CSS 第一个真正意义上的布局系统。
 </CodeGroupItem>
 </CodeGroup>
 
-<Badge type="danger" text="注意"/> 设为 grid 布局以后，容器项目的 float、display: inline-block、display: table-cell、vertical-align 和 column-* 等设置都将失效。
-
 ## 术语
 
 ### grid line
@@ -243,21 +241,447 @@ justify-items:
     v-for="i in ['start', 'end', 'center', 'stretch']">{{ i }}</option>
 </select>
 </div>
-<div class="container"
-    style="grid-template-columns: repeat(3, 100px);grid-template-rows: 100px 100px;"
+<div class="container gridline"
     :style="`justify-items:${justifyItems}`">
-    <div v-for="i in 6" class="item center">{{ i }}</div>
+    <div v-for="i in 6" class="item center">{{ justifyItems }}</div>
 </div>
-<div class="container"
-    style="grid-template-columns: repeat(3, 100px);grid-template-rows: 100px 100px;"
-    :style="`justify-items:${justifyItems}`">
-    <div v-for="i in 6" class="item center">{{ i }}</div>
-</div>
-
 
 设置容器内所有 row 轴上的对齐方式。
 
+### align-items
+
+<div class="wapper">
+align-items: 
+<select v-model="alignItems">
+    <option v-bind:value="i" 
+    v-for="i in ['start', 'end', 'center', 'baseline', 'stretch']">{{ i }}</option>
+</select>
+</div>
+<div class="container gridline"
+    :style="`align-items:${alignItems}`">
+    <div v-for="i in 6" class="item center" :style="`padding-top:${i*10}px`">{{ alignItems }}</div>
+</div>
+
+设置容器内所有 column 轴上的对齐方式。
+
+可以使用修饰符关键字:
+
+* `safe` 安全对齐方式会避免数据丢失的出现，将溢出转移到一边
+* `unsafe` 不安全的对齐方式导致的对齐结果可能会发生数据丢失
+
+```css
+align-items: safe end
+```
+
+### place-items
+
+`align-items` `justify-items` 的缩写形式。
+
+### justify-content
+
+<div class="wapper">
+justify-content: 
+<select v-model="justifyContent">
+    <option v-bind:value="i" 
+    v-for="i in ['start', 'end', 'center', 'stretch', 'space-around', 'space-between', 'space-evenly']">{{ i }}</option>
+</select>
+</div>
+<div class="container c3r2"
+    :style="`justify-content:${justifyContent}`">
+    <div v-for="i in 6" class="item center">{{ i }}</div>
+</div>
+
+用于网格整体内容的尺寸小于网格容器时，用来对齐整个网格在 row 轴上的内容。
+
+
+### align-content
+
+<div class="wapper">
+align-content: 
+<select v-model="alignContent">
+    <option v-bind:value="i" 
+    v-for="i in ['start', 'end', 'center', 'stretch', 'space-around', 'space-between', 'space-evenly']">{{ i }}</option>
+</select>
+</div>
+<div class="container c3r2"
+    style="height: 250px;"
+    :style="`align-content:${alignContent}`">
+    <div v-for="i in 6" class="item center">{{ i }}</div>
+</div>
+
+用于网格整体内容的尺寸小于网格容器时，用来对齐整个网格在 column 轴上的内容。
+
+### place-content
+
+`align-content` `justify-content` 的缩写形式。
+
+
+### grid-auto-columns，grid-auto-rows
+
+<div class="wapper">
+<span class="label" style="width:190px">grid-auto-columns:</span>
+<input v-model="autoColumns" style="width:200px"/><br/>
+<span style="display:inline-block;width:190px">grid-auto-rows:</span>
+<input v-model="autoRows" style="width:200px"/>
+</div>
+<div class="container gridline2"
+  :style="`grid-auto-columns:${autoColumns};grid-auto-rows:${autoRows}`">
+    <div class="item item-auto-a">A</div>
+    <div class="item item-auto-b">B</div>
+</div>
+
+用来给自增的 track 设置尺寸。如上例中创建了两个区域：
+
+<CodeGroup>
+<CodeGroupItem title="页面效果">
+<div style="background-color:#EEE;">
+
+![grid](./grid-auto-columns-rows.svg)
+
+</div>
+</CodeGroupItem>
+<CodeGroupItem title="CSS" active>
+
+```css{10}
+.container {
+  grid-template-columns: 60px 60px;
+  grid-template-rows: 90px 90px;
+}
+.item-a {
+  grid-column: 1 / 2;
+  grid-row: 2 / 3;
+}
+.item-b {
+  grid-column: 5 / 6;
+  grid-row: 2 / 3;
+}
+```
+
+</CodeGroupItem>
+</CodeGroup>
+
+区域 B 设置为 `grid-column: 5 / 6`，但事实上并未定义这些网格线。由于引用了不存在的网格线，将会创建宽度为 0 的 track 来填补这些空隙。而 `grid-auto-columns` 正是用来定义这些 track 的宽度的。row 方向上同理。
+
+### grid-auto-flow
+
+
+当网格中存在未明确指定位置的项目元素时，该属性用来指定其 _自动摆放算法_ 采用的方式。可选值：
+
+* `row` – 指示自动摆放算法按行的顺序按需增加新项目元素 (默认)
+* `column` – 指示自动摆放算法按列的顺序按需增加新项目元素
+* `dense` - 指示自动摆放算法尽量优先使用更小的项目元素摆放
+
+例如，只指定区域 a、e 时：
+
+<CodeGroup>
+<CodeGroupItem title="CSS" active>
+
+```css
+.item-a {
+  grid-column: 1;
+  grid-row: 1 / 3;
+}
+.item-e {
+  grid-column: 5;
+  grid-row: 1 / 3;
+}
+```
+
+</CodeGroupItem>
+<CodeGroupItem title="HTML">
+
+```html
+<section class="container">
+  <div class="item-a">item-a</div>
+  <div class="item-b">item-b</div>
+  <div class="item-c">item-c</div>
+  <div class="item-d">item-d</div>
+  <div class="item-e">item-e</div>
+</section>
+```
+
+</CodeGroupItem>
+</CodeGroup>
+
+如果使用 `row` 则效果为：
+
+<CodeGroup>
+<CodeGroupItem title="页面效果" active>
+<div style="background-color:#EEE;">
+
+![grid](./grid-auto-flow-01.svg)
+
+</div>
+</CodeGroupItem>
+<CodeGroupItem title="CSS">
+
+```css{5}
+.container {
+  display: grid;
+  grid-template-columns: 60px 60px 60px 60px 60px;
+  grid-template-rows: 30px 30px;
+  grid-auto-flow: row;
+}
+```
+
+</CodeGroupItem>
+</CodeGroup>
+
+如果使用 `column` 则效果为：
+
+<CodeGroup>
+<CodeGroupItem title="页面效果" active>
+<div style="background-color:#EEE;">
+
+![grid](./grid-auto-flow-02.svg)
+
+</div>
+</CodeGroupItem>
+<CodeGroupItem title="CSS">
+
+```css{5}
+.container {
+  display: grid;
+  grid-template-columns: 60px 60px 60px 60px 60px;
+  grid-template-rows: 30px 30px;
+  grid-auto-flow: column;
+}
+```
+
+</CodeGroupItem>
+</CodeGroup>
+
+
+### grid
+
+以下属性的简写形式：
+
+* grid-template-rows
+* grid-template-columns
+* grid-template-areas
+* grid-auto-rows
+* grid-auto-columns
+* grid-auto-flow
+
+<CodeGroup>
+<CodeGroupItem title="等价写法 1" active>
+
+```css
+.container {
+  grid: 100px 300px / 3fr 1fr;
+}
+
+.container {
+  grid-template-rows: 100px 300px;
+  grid-template-columns: 3fr 1fr;
+}
+```
+
+</CodeGroupItem>
+<CodeGroupItem title="等价写法 2">
+
+```css
+.container {
+  grid: auto-flow / 200px 1fr;
+}
+
+.container {
+  grid-auto-flow: row;
+  grid-template-columns: 200px 1fr;
+}
+```
+
+</CodeGroupItem>
+<CodeGroupItem title="等价写法 3">
+
+```css
+.container {
+  grid: auto-flow dense 100px / 1fr 2fr;
+}
+
+.container {
+  grid-auto-flow: row dense;
+  grid-auto-rows: 100px;
+  grid-template-columns: 1fr 2fr;
+}
+```
+
+</CodeGroupItem>
+<CodeGroupItem title="等价写法 4">
+
+```css
+.container {
+  grid: 100px 300px / auto-flow 200px;
+}
+
+.container {
+  grid-template-rows: 100px 300px;
+  grid-auto-flow: column;
+  grid-auto-columns: 200px;
+}
+```
+
+</CodeGroupItem>
+<CodeGroupItem title="等价写法 5">
+
+```css
+.container {
+  grid: [row1-start] "header header header" 1fr [row1-end]
+        [row2-start] "footer footer footer" 25px [row2-end]
+        / auto 50px auto;
+}
+
+.container {
+  grid-template-areas: 
+    "header header header"
+    "footer footer footer";
+  grid-template-rows: [row1-start] 1fr [row1-end row2-start] 25px [row2-end];
+  grid-template-columns: auto 50px auto;    
+}
+```
+
+</CodeGroupItem>
+</CodeGroup>
+
+
 ## 项目元素属性
+
+> <Badge type="danger" text="注意"/> 设为 grid 布局以后，容器项目的 float、display: inline-block、display: table-cell、vertical-align 和 column-* 等设置都将失效。
+
+### grid-column-start，grid-column-end，grid-row-start，grid-row-end
+
+依据网格线来定义网格元素在网格中的位置。可选值为：
+
+* {grid line} – 网格线的数字序号或名字
+* span {number} – 合并指定 number 数量的网格 track
+* span {name} – 合并至指定的 name 网格线处
+* auto – 浏览器自动计算
+
+<CodeGroup>
+<CodeGroupItem title="CSS" active>
+
+```css
+.item {
+  grid-column-start: 2;
+  grid-column-end: five;
+  grid-row-start: row1-start;
+  grid-row-end: 3;
+}
+```
+
+</CodeGroupItem>
+<CodeGroupItem title="效果" active>
+<div style="background-color:#EEE">
+
+![grid](./grid-column-row-start-end-01.svg)
+
+</div>
+</CodeGroupItem>
+</CodeGroup>
+
+<CodeGroup>
+<CodeGroupItem title="CSS" active>
+
+```css
+.item {
+  grid-column-start: 1;
+  grid-column-end: span col4-start;
+  grid-row-start: 2;
+  grid-row-end: span 2;
+}
+```
+
+</CodeGroupItem>
+<CodeGroupItem title="效果" active>
+<div style="background-color:#EEE">
+
+![grid](./grid-column-row-start-end-02.svg)
+
+</div>
+</CodeGroupItem>
+</CodeGroup>
+
+如果未指定 end 值，项目只会穿过 1 个 track 。
+
+
+### grid-column，grid-row
+
+`grid-column` 是 `grid-column-start` `grid-column-end` 的简写形式，
+`grid-row` 是 `grid-row-start` `grid-row-end` 的简写形式。
+
+
+```css
+.item {
+  grid-column: 3 / span 2;
+  grid-row: third-line / 4;
+}
+```
+
+### grid-area
+
+共有两个用法，一是配合 `grid-template-areas` 使用，用来指定区域名：
+
+```css
+.item {
+  grid-area: header;
+}
+```
+
+另外，还可以作为 `grid-row-start` `grid-column-start` `grid-row-end` `grid-column-end` 的简写形式：
+
+```css
+.item {
+  grid-area: 1 / col4-start / last-line / 6;
+}
+```
+
+### justify-self
+
+<div class="wapper">
+justify-self: 
+<select v-model="justifySelf">
+    <option v-bind:value="i" 
+    v-for="i in ['start', 'end', 'center', 'stretch']">{{ i }}</option>
+</select>
+justify-items: 
+<select v-model="justifyItems2">
+    <option v-bind:value="i" 
+    v-for="i in ['start', 'end', 'center', 'stretch']">{{ i }}</option>
+</select>
+</div>
+<div class="container gridline"
+    :style="`justify-items:${justifyItems2}`">
+    <div class="item center current" :style="`justify-self:${justifySelf}`">{{ justifySelf }}</div>
+    <div v-for="i in 5" class="item center">{{ justifyItems2 }}</div>
+</div>
+
+其效果同 `justify-items` ，但只针对指定的项目生效。
+
+### align-self
+
+<div class="wapper">
+align-self: 
+<select v-model="alignSelf">
+    <option v-bind:value="i" 
+    v-for="i in ['start', 'end', 'center', 'stretch']">{{ i }}</option>
+</select>
+align-items: 
+<select v-model="alignItems2">
+    <option v-bind:value="i" 
+    v-for="i in ['start', 'end', 'center', 'baseline', 'stretch']">{{ i }}</option>
+</select>
+</div>
+<div class="container gridline"
+    :style="`align-items:${alignItems2}`">
+    <div class="item center current" :style="`align-self:${alignSelf}`">{{ alignSelf }}</div>
+    <div v-for="i in 5" class="item center">{{ alignItems2 }}</div>
+</div>
+
+其效果同 `align-items` ，但只针对指定的项目生效。
+
+### place-self
+
+`align-self` `justify-self` 的简写形式：
 
 ## 特殊单位和函数
 
@@ -451,7 +875,16 @@ export default {
         minmaxWidth: 800,
         columnGap: '20px',
         rowGap: '10px',
-        justifyItems: 'stretch'
+        justifyItems: 'stretch',
+        alignItems: 'stretch',
+        justifyContent: 'stretch',
+        alignContent: 'stretch',
+        justifySelf: 'stretch',
+        justifyItems2: 'stretch',
+        alignSelf: 'stretch',
+        alignItems2: 'stretch',
+        autoColumns: '30px',
+        autoRows: '30px',
     }
   }
 }
@@ -482,6 +915,9 @@ export default {
   justify-content: center;
   align-content: center;
 }
+.item.current {
+  background-color: red;
+}
 .container.area {
   height: 200px;
   grid-template-columns: 50px 1fr 50px 50px;
@@ -490,6 +926,36 @@ export default {
     "header header header header"
     "main main . sidebar"
     "footer footer footer footer";
+}
+.container.c3r2 {
+  grid-template-columns: repeat(3, 100px);
+  grid-template-rows: 100px 100px;
+}
+.container.gridline {
+  gap: 0;
+  grid-template-columns: repeat(3, 200px);
+  grid-template-rows: 100px 100px;
+  background-image: linear-gradient(90deg,rgb(245 140 10 /.9) 1px, transparent 0),
+              linear-gradient(rgb(245 140 10) 1px, transparent 0);
+  background-size: 200px 100px;
+  height: 201px;
+  width: 601px;
+  box-sizing: border-box;
+}
+.container.gridline2 {
+  gap: 0;
+  grid-template-columns: 60px 60px;
+  grid-template-rows: 90px 90px;
+  background-image: linear-gradient(90deg,rgb(245 140 10 /.9) 1px, transparent 0),
+              linear-gradient(rgb(245 140 10) 1px, transparent 0);
+  background-size: 10px 10px;
+  box-sizing: border-box;
+  height: 201px;
+  width: 601px;
+  background-color: transparent;
+}
+.container.gridline .item {
+  opacity: .9;
 }
 .item-a {
   grid-area: header;
@@ -503,6 +969,15 @@ export default {
 .item-d {
   grid-area: footer;
 }
+.item-auto-a {
+  grid-column: 1 / 2;
+  grid-row: 2 / 3;
+}
+.item-auto-b {
+  grid-column: 5 / 6;
+  grid-row: 2 / 3;
+}
+
 input {
   border: none;
   border-bottom: 1px solid #999;

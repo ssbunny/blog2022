@@ -18,8 +18,8 @@ module.exports = {
       {
         text: '实验室',
         children: [
-           { text: 'flex 布局', link: '/lab/css_layout_flexbox' },
-           { text: 'grid 布局', link: '/lab/css_layout_grid' },
+           { text: 'CSS Flex Layout', link: '/lab/css_layout_flexbox' },
+           { text: 'CSS Grid Layout', link: '/lab/css_layout_grid' },
         ],
       },
       {
