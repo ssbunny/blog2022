@@ -7,15 +7,14 @@ sidebar: false
 ## 总结
 
 * [JavaScript 中高级知识整理](JavaScript中高级知识整理.md)
-* [HTTP 缓存知识整理](HTTP缓存知识整理.md)
 * [关于 JavaScript 数字的那些事](关于JavaScript数字的那些事.md)
-* [培训讲义——密码学基础](培训讲义_密码学基础.md)
+* [HTTP 缓存知识整理](HTTP缓存知识整理.md)
+* [培训讲义: 密码学基础](培训讲义_密码学基础.md)
 * [写好程序分支控制](写好程序分支控制.md)
 * [CSS 布局技巧之 2015](CSS布局技巧.md)
 * [Java8 之 Lambda 表达式](Java8之Lambda表达式.md)
 * [Redis 中的命令](Redis中的命令.md)
 * [源码阅读: Redis 中的数据结构](Redis中的数据结构.md)
-
 
 ## 心得
 
@@ -27,7 +26,6 @@ sidebar: false
 * [Micro Frontends In Action](Micro_Frontends_In_Action.md)
 * [VSCode 源代码组织方式](VSCode源代码组织方式.md)
 * [TypeScript 官方手册学习笔记](TypeScript官方手册学习笔记.md)
-
 
 ## 译文
 

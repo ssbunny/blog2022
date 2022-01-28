@@ -14,17 +14,18 @@ module.exports = {
   themeConfig: {
     logo: '/images/home_bug.svg',
     navbar: [
-      {
-        text: '文章',
-        link: '/notes',
-      },
+      { text: '技术文章', link: '/notes' },
       {
         text: '实验室',
         children: [
-           {
-            text: 'flex 布局',
-            link: '/lab/css_layout_flexbox',
-          },
+           { text: 'flex 布局', link: '/lab/css_layout_flexbox' },
+           { text: 'grid 布局', link: '/lab/css_layout_grid' },
+        ],
+      },
+      {
+        text: '常用链接',
+        children: [
+           { text: '豆瓣', link: 'https://www.douban.com/people/90224829' },
         ],
       },
     ],
