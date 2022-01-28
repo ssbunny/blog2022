@@ -18,7 +18,7 @@ features:
     details: 靠代码行数来衡量开发进度，就像是凭重量来衡量飞机制造的进度。
   - title: Ash Maurya
     details: 生命太短暂，不要去做一些根本没有人想要的东西。
-footer: MIT Licensed | Copyright © 2022-present zhangqiang
+footer: MIT Licensed | Copyright © 2015-2022 zhangqiang
 ---
 
 
