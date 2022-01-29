@@ -1,0 +1,15 @@
+:root {
+  --c-brand: rgb(0 101 105);
+  --c-brand-light: rgb(0 137 143);
+}
+
+
+html.dark {
+  --c-brand: #3aa675;
+  --c-brand-light: #349469;
+}
+
+::selection {
+  color: #FFF;
+  background-color: var(--c-brand);
+}

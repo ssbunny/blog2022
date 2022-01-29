@@ -1,3 +1,4 @@
+const { path } = require('@vuepress/utils')
 
 module.exports = {
   base: '/',
@@ -10,7 +11,7 @@ module.exports = {
   title: '兔子不咬人',
   description: '我的个人空间',
   // 主题
-  theme: '@vuepress/theme-default',
+  theme: path.resolve(__dirname, './.vuepress/theme'),
   themeConfig: {
     logo: '/images/home_bug.svg',
     navbar: [
