@@ -26,7 +26,10 @@ module.exports = {
       {
         text: '常用链接',
         children: [
-           { text: '豆瓣', link: 'https://www.douban.com/people/90224829' },
+          { text: '代码执行过程可视化', link: 'https://pythontutor.com/visualize.html#mode=edit' },
+          { text: 'latex 公式编辑器', link: 'https://latex.codecogs.com/' },
+          { text: 'ascii 流程图', link: 'https://asciiflow.com/#/' },
+          { text: 'ascii art 生成', link: 'http://patorjk.com/software/taag' },
         ],
       },
     ],

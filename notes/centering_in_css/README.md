@@ -14,7 +14,7 @@
 }
 ```
 
-### 单个块级元素
+### 块级元素(单个)
 
 如果是单个块级元素，可将 `margin-left` 和 `margin-right` 都设置为 `auto` （此时该元素有 `width` 属性，否则它将撑满整行而不需要居中）。通常简写为：
 
@@ -26,7 +26,7 @@
 
 不管 `width` 为多少都会生效，但不要使用 `float` 来居中。
 
-### 多个块级元素
+### 块级元素(多个)
 
 如果是多个块级元素在**水平方向上**的一行居中，可以先把其设置为 `inline-block`。
 
@@ -80,7 +80,7 @@
 
 ## 垂直
 
-### 单行的行内元素
+### 行内元素(单行)
 
 有些情况下，行内垂直居中仅仅需要将其上下 padding 设为相同的值：
 
@@ -101,12 +101,9 @@
 }
 ```
 
-### 多行的行内元素
+### 行内元素(多行)
 
 对于多行文本，上下同 padding 的方法仍然可用。如果不失效，那可能当前文本正处在 \<table\> 或类似表格的单元格中，此时使用 `vertical-align` 属性即可：
-
-
-
 
 <CodeGroup>
 <CodeGroupItem title="CSS" active>
@@ -185,8 +182,117 @@ table td {
 
 ### 块级元素
 
+对于固定高度的元素，有下面经典的实现方法：
+
+```css{9}
+.parent {
+  position: relative;
+  height: 200px;
+}
+.child {
+  position: absolute;
+  top: 50%;
+  width: 200px;
+  height: 100px;
+  margin-top: -50px; 
+}
+```
+
+即便不知道元素的高度，仍然可以使用该思路实现：
+
+```css{7}
+.parent {
+  position: relative;
+}
+.child {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+}
+```
+
+如果不介意父元素被撑大，还可以使用 table 实现：
+
+```css{7,11-12}
+.parent {
+  height: 300px;
+  margin: 20px;
+  width: 300px;
+  position: relative;
+  padding: 20px;
+  display: table;
+}
+.child {
+  padding: 20px;
+  display: table-cell;
+  vertical-align: middle;
+}
+```
+
+最后，依然是便捷的 flexbox 布局：
+
+```css
+.parent {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+```
+
 ## 两者
 
+通常可以联合上面的所有方式来实现两个方向同时居中。当知道元素宽高时，通常使用绝对定位并配合负 margin 的方式具备最佳的浏览器兼容性：
+
+```css{8-11}
+.parent {
+  position: relative;
+}
+.child {
+  width: 300px;
+  height: 100px;
+  padding: 20px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  margin: -70px 0 0 -170px;
+}
+```
+
+相应的，不知道宽高时可以使用：
+
+```css
+.parent {
+  position: relative;
+}
+.child {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+```
+
+同样还是便捷的 flexbox 布局：
+
+```css
+.parent {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+```
+
+如果是单一元素，可以利用 grid 布局并使用以下小技巧：
+
+```css
+.parent {
+  height: 100%;
+  display: grid;
+}
+.child {
+  margin: auto;
+}
+```
 
 <style scoped>
 .inline-block-center {
@@ -202,3 +308,6 @@ table td {
   color: #FFF;
 }
 </style>
+
+---
+@ssbunny 2022-02-08

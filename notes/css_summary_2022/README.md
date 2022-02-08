@@ -81,8 +81,6 @@ a.my-class {
 }
 ```
 
-
-
 ## 3. 级联
 
 级联是解决多个 CSS 规则应用于一个 HTML 元素所产生冲突的算法。分为 4 个不同的阶段：
@@ -131,23 +129,46 @@ a.my-class {
 3. !important 规则类型
 4. transition 规则类型
 
-
-
 ## 4. 继承
 
 不指定值时，CSS 属性会自动继承。**继承流**：由父至子元素自上而下的继承，不会反向至父级。
 
 目前可继承的属性有：
 
-azimuth border-collapse border-spacing caption-side color cursor direction empty-cells font-family font-size font-style font-variant font-weight font letter-spacing line-height list-style-image list-style-position list-style-type list-style orphans quotes text-align text-indent text-transform visibility white-space widows word-spacing
+* azimuth
+* border-collapse 
+* border-spacing 
+* caption-side 
+* color 
+* cursor 
+* direction 
+* empty-cells 
+* font-family 
+* font-size 
+* font-style 
+* font-variant 
+* font-weight 
+* font 
+* letter-spacing 
+* line-height 
+* list-style-image 
+* list-style-position 
+* list-style-type 
+* list-style 
+* orphans 
+* quotes 
+* text-align 
+* text-indent 
+* text-transform 
+* visibility 
+* white-space 
+* widows 
+* word-spacing
 
 关键字：
 * inherit（明确指定继承）
 * initial（重置为初始值）
 * unset（可继承属性等同于 inherit ，不可继承属性等同于 initial）
-
-
-
 
 ## 5. 颜色
 
@@ -194,8 +215,6 @@ HSL 使用颜色（色盘中的度数）、饱和度、亮度来表示颜色。h
 * linear-gradient
 * border-color, outline-color
 * box-shadow
-
-
 
 
 ## 6. 尺寸单位
