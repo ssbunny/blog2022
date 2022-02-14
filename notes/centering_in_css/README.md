@@ -103,7 +103,7 @@
 
 ### 行内元素(多行)
 
-对于多行文本，上下同 padding 的方法仍然可用。如果不失效，那可能当前文本正处在 \<table\> 或类似表格的单元格中，此时使用 `vertical-align` 属性即可：
+对于多行文本，上下同 padding 的方法仍然可用。如果不生效，那可能当前文本正处在 \<table\> 或类似表格的单元格中，此时使用 `vertical-align` 属性即可：
 
 <CodeGroup>
 <CodeGroupItem title="CSS" active>

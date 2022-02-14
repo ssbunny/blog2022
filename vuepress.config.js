@@ -19,8 +19,9 @@ module.exports = {
       {
         text: '实验室',
         children: [
-           { text: 'CSS Flex Layout', link: '/lab/css_layout_flexbox' },
-           { text: 'CSS Grid Layout', link: '/lab/css_layout_grid' },
+           { text: 'CSS Flex 布局', link: '/lab/css_layout_flexbox' },
+           { text: 'CSS Grid 布局', link: '/lab/css_layout_grid' },
+           { text: 'Web 特效演示', link: '/lab/web-demo' },
         ],
       },
       {

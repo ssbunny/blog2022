@@ -8,6 +8,7 @@ sidebar: false
 
 ## 2022 年以后
 
+* [Web 动画](./web_animation/README.md)
 * [CSS 实现居中的方式](./centering_in_css/README.md)
 * [CSS 全面总结之 2022](./css_summary_2022/README.md)
 
