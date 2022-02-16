@@ -181,7 +181,7 @@ element.className = 'moveRight'
 }
 ```
 
-此功能从 Chrome 74 开始支持。以 MOC OS 为例，开启动画减弱功能：
+此功能从 Chrome 74 开始支持。以 MAC OS 为例，开启动画减弱功能：
 
 ![reduce](./reduce.jpg)
 
@@ -603,7 +603,45 @@ animation: path_triangle 10s ease-in-out infinite;
 
 ## Web Animations API
 
-Web Animations API 使用 JavaScript 访问浏览器动画引擎，是 CSS Animations 和 CSS Transitions 的底层实现。使用它可以避免直接往元素中增加 CSS 属性等重 DOM 技术。
+Web Animations API ( WAAPI ) 使用 JavaScript 访问浏览器动画引擎，是 CSS Animations 和 CSS Transitions 的底层实现。使用它可以避免直接往元素中增加 CSS 属性等重 DOM 技术。
+
+### 重要概念
+
+WAAPI 运行在两种模型下：
+
+* **时序模型**：保持处理动画的时间线轨迹
+* **动画模型**：决定特定时间点动画对象的外观
+
+时序模型是 WAAPI 的基石。每个 document 都有主时间线 `Document.timeline` ，它从页面加载一直延续到窗口关闭。动画从主时间线上的某一点 `Animation.startTime` 开始, 基于主时间线播放。如改变位置、加减速、重复执行等。
+
+动画模型可理解为一组特定时间点的快照，并在持续时间 `duration` 内连接起来。
+
+#### 核心对象
+
+**Timeline：** 其中的重要属性 `currentTime` 表示动画的当前时间。“当前”是指相对于 document 的时间。（目前只有 `Document.timeline` 一种时间线。）
+
+**Animation：**  控制动画的播放。就像 DVD 播放机一样，控制动画的开始、暂停、播放的方向及速度等。但如果未放入 DVD 则不会起作用。
+
+**AnimationEffect：** 就像 DVD ，它是一组绑定在一起的信息，如动画持续时间等。Animation 对象使用它完成动画的播放。目前只有 `KeyframeEffect` 一种实现。
+
+
+可以使用 `Animation()` 构造函数或 `Element.animate()` 将三者结合起来：
+
+```js
+let animation = new Animation([effect][, timeline])
+```
+
+
+
+
+
+
+
+
+
+
+
+
 
 ### 编写动画
 
@@ -677,7 +715,7 @@ document.getElementById('someEl').animate(
 
 ### 操控动画
 
-只是设计动画效果的话，就和 CSS 动画没区别了。Web Animations API 的更大价值在于操控动画。
+只是设置动画效果的话，就和 CSS 动画没区别了。Web Animations API 的更大价值在于操控动画。
 
 使用 `Element.animate()` 创建完动画后便会立即执行，为了阻止这种行为，可以先将其暂停：
 
@@ -697,7 +735,7 @@ someAnimation.play();
 * `Animation.cancel()` 结束当前动画并取消所有动画效果
 * `Animation.reverse()` 反转动画播放方向
 
-先看 `playbackRate`， 将其设为负值可导致动画反向播放：
+再看 `playbackRate`， 将其设为负值可导致动画反向播放：
 
 ```js
 someAnimation.playbackRate = -1
@@ -716,14 +754,50 @@ someAnimation.play();
 
 ```js
 var goFaster = function () {
-  someAnimation.updatePlaybackRate(someAnimation.playbackRate * 1.1);
+  someAnimation.updatePlaybackRate(someAnimation.playbackRate * 1.1)
 }
 ````
 
+### 获取动画信息
 
+`Document.getAnimations` 可以获取当前页面所有动画。如，要让所有动画减速（CSS 无法实现）可以：
 
+```js
+document.getAnimations().forEach(
+  function (animation) {
+    animation.updatePlaybackRate(animation.playbackRate * .5)
+  }
+)
+```
 
+`Animation.currentTime` 表示当前动画的时间（无论正在进行或暂停），单位为 ms 。若动画没有 timeline 或已经停止，则其值为 `null` 。
 
+```js
+let currentTime = animation.currentTime
+animation.currentTime = newTime
+````
+
+`Animation.effect` 表示动画的目标效果，一般为 [KeyframeEffect](https://developer.mozilla.org/en-US/docs/Web/API/KeyframeEffect) 。其包含的方法如 `getComputedTiming()` 可以返回该关键帧的、计算后的当前时间对象：
+
+```js
+animation.effect.getComputedTiming().duration
+```
+
+### 回调与 Promise
+
+回调函数：
+
+* `onfinish` 动画触发 `finish` 事件时或调用 `finish()` 方法时执行该回调
+* `oncancel` 动画触发 `cancel` 事件时或调用 `cancel()` 方法时执行该回调
+
+另外还提供了一个 Promise 对象 `Animation.finished` ：
+
+```js
+animation.finished
+  .then(() => {
+    element.remove()
+  })
+````
 
 
 <script>
@@ -754,7 +828,8 @@ export default {
       ], 3000)
     this.animation3.playbackRate = -1
     this.animation3.pause()
-    
+
+
   },
   methods: {
   	listener (event) {
