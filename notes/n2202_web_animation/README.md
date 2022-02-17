@@ -1,6 +1,6 @@
-# Web 动画
+# Web 动画技术概览
 
-## 总述
+## 性能问题
 
 现代浏览器中，`transform` 和 `opacity` 拥有良好的动画性能，而处理其它动画时则需要保证 60 FPS 才能得到平滑的用户体验。
 
@@ -631,6 +631,9 @@ WAAPI 运行在两种模型下：
 let animation = new Animation([effect][, timeline])
 ```
 
+---
+@ssbunny 2022-02-16
+
 
 
 
@@ -798,6 +801,9 @@ animation.finished
     element.remove()
   })
 ````
+
+---
+@ssbunny 2022-02-16
 
 
 <script>
