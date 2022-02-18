@@ -18,7 +18,7 @@
 
 ## 2. 处理过程
 
-![IMAGE](./resources/355FC267475DC7C0F5EAFACF9B3A4D40.jpg)
+![IMAGE](./resources/http_cache.jpg)
 
 ## 3. 再验证
 

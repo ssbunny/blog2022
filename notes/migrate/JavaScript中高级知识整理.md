@@ -96,7 +96,7 @@ var foo = new Foo();
 
 再加上内置函数对象 String，其关系如下：
 
-![function_relation.png](./resources/DD6C3EED083B17D092CBA76B80AE4039.png)
+![function_relation.jpg](./resources/DD6C3EED083B17D092CBA76B80AE4039.jpg)
 
 有如下规律：
 * 所有函数对象的原型最终指向 Function.prototype ；

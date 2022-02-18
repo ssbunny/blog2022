@@ -133,7 +133,7 @@
 
 ### 3.2 使用Nginx实现服务端路由
 
-![IMAGE](./resources/BAB9245359D9228FEAA93C14343B0ECF.jpg =616x305)
+![IMAGE](./resources/BAB9245359D9228FEAA93C14343B0ECF.jpg)
 
 实现方式：配置Nginx
 
@@ -235,7 +235,7 @@ SSI 命令包含 `stub` 参数用以配置失效时的回退方案：
 
 1）并行加载
 
-![IMAGE](./resources/8EA3D02709A243450DFBAF1BD3A560C3.jpg =693x280)
+![IMAGE](./resources/8EA3D02709A243450DFBAF1BD3A560C3.jpg)
 
 > The response time for the complete markup, also called **time to first byte (TTFB)**, is defined by the time it takes to generate the page markup and the time of the slowest fragment
 
