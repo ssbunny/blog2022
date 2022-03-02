@@ -9,7 +9,6 @@ sidebar: false
 ## 2022 年
 
 * [高观点下的 Vue.js 框架](./n2203_vue_advanced_standpoint/README.md)
-* [Resize Observer API](./n2202_resize_observer/README.md)
 * [我们的软件：由 Gamepad API 引发的感想](./n2202_thinking_in_software/README.md)
 * [Web 动画技术概览](./n2202_web_animation/README.md)
 * [CSS 实现居中的方式](./n2202_centering_in_css/README.md)
