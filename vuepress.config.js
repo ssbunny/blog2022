@@ -15,7 +15,7 @@ module.exports = {
   themeConfig: {
     logo: '/images/home_bug.svg',
     navbar: [
-      { text: '技术文章', link: '/notes' },
+      { text: '技术笔记', link: '/notes' },
       {
         text: '实验室',
         children: [
