@@ -6,6 +6,13 @@ sidebar: false
 
 自工作伊始，整理过许多笔记。历经使用了 JavaEye(后改名iteye)、CSDN、简书、印象笔记、hexo、语雀、Quiver 等一系列工具，越来越不喜欢维护形式上的东西。奈何 Quiver 这种本地笔记无法实现一些实时的效果演示，打算 2022 年开始用 vuepress , 之前的只做少量迁移。
 
+
+## 2023 年
+
+* [11月 - Rust 中的 Sized](./n2311_sizeness_in_rust/README.md)
+* [09月 - Rust 生命周期的常见误区](./n2309_rust_lifetimes_misconceptions/README.md)
+
+
 ## 2022 年
 
 * [12月 - 图解 Rust 内存布局(多图预警) ](./n2212_rust_memory_layout/README.md)
